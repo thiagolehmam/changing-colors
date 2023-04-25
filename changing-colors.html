@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,18 +14,21 @@
     <canvas width="600" height="400"></canvas>
 
     <script>
-
+        //Selects the canvas element on the page and gets the 2D context to draw on it.
+        // Seleciona o elemento canvas na página e obtém o contexto 2D para desenhar nele.
         var screen = document.querySelector('canvas');
         var brush = screen.getContext('2d');
         brush.fillStyle = 'grey';
         brush.fillRect(0, 0, 600, 400);
 
-
+        //Creates an array with the three possible colors and initializes the index variable for the current color.
+        // Cria um array com as três colors possíveis e inicializa a variável de índice para a cor atual.
         var colors = ['blue', 'red', 'green']
-        var currentColorIndex = 0;
+        var currentColorIndex = 0; // começa com blue
 
         function drawCircle(evento) {
-
+            //Sets the current color in the 2D context and draws the ball in the click position.
+            // Define a cor atual no contexto 2D e desenha a bola na posição do clique.
             var x = evento.pageX - screen.offsetLeft;
             var y = evento.pageY - screen.offsetTop;
             brush.fillStyle = colors[currentColorIndex];
@@ -36,15 +40,16 @@
         screen.onclick = drawCircle;
 
         function changeColor() {
-
+            //Increments the current color index and restarts if it exceeds the length of the array.
+            // Incrementa o índice da cor atual e reinicia se exceder o comprimento do array.
             currentColorIndex++;
             if (currentColorIndex >= colors.length) {
-                currentColorIndex = 0;
+                currentColorIndex = 0; // back to the first color, blue || volta para a primeira cor, azul
             }
-            return false;
+            return false; // so it doesn't display the default canvas menu || para não exibir o menu padrão do canvas 
         }
         screen.oncontextmenu = changeColor;
-
+        
     </script>
 </body>
 
