@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+
+
+        //Selects the canvas element on the page and gets the 2D context to draw on it.
+        // Seleciona o elemento canvas na página e obtém o contexto 2D para desenhar nele.
+        var screen = document.querySelector('canvas');
+        var brush = screen.getContext('2d');
+        brush.fillStyle = 'grey';
+        brush.fillRect(0, 0, 600, 400);
+
+        //Creates an array with the three possible colors and initializes the index variable for the current color.
+        // Cria um array com as três colors possíveis e inicializa a variável de índice para a cor atual.
+        var colors = ['blue', 'red', 'green']
+        var currentColorIndex = 0; // começa com blue
+
+        function drawCircle(event) {
+
+            //Sets the current color in the 2D context and draws the ball in the click position.
+            // Define a cor atual no contexto 2D e desenha a bola na posição do clique.
+            var x = event.pageX - screen.offsetLeft;
+            var y = event.pageY - screen.offsetTop;
+
+            var radius = 10;
+            console.log(x + ',' + y);
+
+            if (event.shiftKey) {
+                radius = radius + 20; // radius now worths 30! | raio agora passa a valer 30!
+            }
+
+            brush.fillStyle = colors[currentColorIndex];
+            brush.beginPath();
+            brush.arc(x, y, radius, 0, 2 * 3.14);
+            brush.fill();
+        }
+        screen.onclick = drawCircle;
+
+        function changeColor() {
+            //Increments the current color index and restarts if it exceeds the length of the array.
+            // Incrementa o índice da cor atual e reinicia se exceder o comprimento do array.
+            currentColorIndex++;
+            if (currentColorIndex >= colors.length) {
+                currentColorIndex = 0; // back to the first color, blue || volta para a primeira cor, azul
+            }
+            return false; // so it doesn't display the default canvas menu || para não exibir o menu padrão do canvas 
+        }
+        screen.oncontextmenu = changeColor;
+      
+        tela.onclick = desenhaCirculo;
+    </script>
+</body>
+
+</html>
